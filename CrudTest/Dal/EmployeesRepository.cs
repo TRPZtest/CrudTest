@@ -25,7 +25,7 @@ public class EmployeesRepository
             new SqlParameter("@ProgrammingLanguageId", employee.ProgrammingLanguageId)
         };
 
-        await _context.Database.ExecuteSqlRawAsync("EXEC dbo.UpdateEmployee @Name, @Surname, @Age, @DepartmentId, @ProgrammingLanguageId", parameters);
+        await _context.Database.ExecuteSqlRawAsync("EXEC dbo.AddEmployee @Name, @Surname, @Age, @DepartmentId, @ProgrammingLanguageId", parameters);
     }
 
     public async Task UpdateEmployee(Employee employee)
@@ -40,7 +40,7 @@ public class EmployeesRepository
             new SqlParameter("@ProgrammingLanguageId", employee.ProgrammingLanguageId)
         };
 
-        await _context.Database.ExecuteSqlRawAsync("EXEC dbo.AddEmployee @Id, @Name, @Surname, @Age, @DepartmentId, @ProgrammingLanguageId", parameters);
+        await _context.Database.ExecuteSqlRawAsync("EXEC dbo.UpdateEmployee @Id, @Name, @Surname, @Age, @DepartmentId, @ProgrammingLanguageId", parameters);
     }
 
     public async Task<List<ProgrammingLaguage>> GetProgrammingLaguages()
@@ -58,14 +58,14 @@ public class EmployeesRepository
         return await _context.EmployeeViews.FromSqlRaw("EXEC dbo.GetEmployeeViews").ToListAsync();
     }
 
-    public async Task<IEnumerable<EmployeeView>> GetEmployeeViewById(int id)
+    public async Task<IEnumerable<EmployeeView>> GetEmployeeViewById(int? id)
     {
         var employeeId = new SqlParameter("@EmployeeId", id);
 
         return await _context.EmployeeViews.FromSqlRaw("EXEC dbo.GetEmployeeViewById @EmployeeId", employeeId).ToArrayAsync();
     }
 
-    public async Task DeleteEmployee(int id)
+    public async Task DeleteEmployee(int? id)
     {
         var employeeId = new SqlParameter("@EmployeeId", id);
 

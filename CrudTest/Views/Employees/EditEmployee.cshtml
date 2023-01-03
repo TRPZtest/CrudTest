@@ -1,0 +1,99 @@
+﻿@using CrudTest.Models.ViewModels
+@{
+    ViewData["Title"] = "Edit employee";
+
+}
+@model EditEmployeeViewModel
+
+<form id="EditEmployeeId">
+
+    <div id="EmployeeId-group" class="row form-group">
+        <div class="col-3 text-end">
+            <label><b>Employee Id</b></label>
+        </div>
+        <div class="col-3">
+            <span id="employeeId">@Model.EmployeeView?.Id</span>
+        </div>
+    </div>
+
+    <div id="name-group" class="row form-group">
+        <div class="col-3 text-end">
+            <label for="name"><b>Name</b></label>
+        </div>
+        <div class="col-3">
+            <input type="text" placeholder="Enter name" name="name" id="name" value="@Model.EmployeeView?.Name">
+        </div>
+    </div>
+
+    <div id="surname-group" class="row form-group">
+        <div class="col-3 text-end">
+            <label for="surname"><b>Surname</b></label>
+        </div>
+        <div class="col-3">
+            <input type="text" placeholder="Enter surname" name="surname" id="surname" value="@Model.EmployeeView?.Surname">
+        </div>
+    </div>
+
+    <div id="age-group" class="row form-group">
+        <div class="col-3 text-end">
+            <label for="age"><b>Age</b></label>
+        </div>
+        <div class="col-3">
+            <input type="text" placeholder="Enter age" name="age" id="age" value="@Model.EmployeeView?.Age">
+        </div>
+    </div>
+
+    <div id="department-group" class="row form-group">
+        <div class="col-3 text-end">
+            <label for="department"><b>Department</b></label>
+        </div>
+
+        <div class="col-3">
+            <select class="form-select" type="text" placeholder="Choose department" name="department" id="department">
+                <option value="@Model.EmployeeView?.DepartmentId"  selected>@Model.EmployeeView?.DepartmentName</option>
+                @{
+                    if (Model.Departments != null)
+                        foreach (var pl in Model.Departments)
+                        {
+                            <option value="@pl.Id">@pl.Name</option>
+                        }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div id="programmingLanguage-group" class="row form-group">
+        <div class="col-3 text-end">
+            <label for="programmingLanguage"><b>Programming language</b></label>
+        </div>
+
+        <div class="col-3">
+            <select class="form-select" type="text" placeholder="Choose programming language" name="programmingLanguage" id="programmingLanguage">
+                <option value="@Model.EmployeeView?.ProgrammingLanguageId" selected>@Model.EmployeeView?.ProgrammingLanguageName</option>
+                @{
+                    if (Model.ProgrammingLaguages != null)
+                        foreach (var pl in Model.ProgrammingLaguages)
+                        {
+                            <option value="@pl.Id">@pl.Name</option>
+                        }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <input type="submit" value="Edit" class="col-1  offset-2" />
+    </div>
+
+    <div class="row">
+        <div id="OperationResult" class="col-6 text-center">
+        </div>
+    </div>
+
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script src="~/js/employee/EditEmployeeScript.js"></script>

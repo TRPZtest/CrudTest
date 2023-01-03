@@ -3,10 +3,11 @@ using CrudTest.Dal;
 using CrudTest.Models;
 using CrudTest.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.ObjectModelRemoting;
 
 namespace CrudTest.Controllers;
 
-
+[Route("")]
 public class EmployeesController : Controller
 {
     private readonly EmployeesRepository _repository;
@@ -55,7 +56,7 @@ public class EmployeesController : Controller
 
     [HttpGet]
     [Route("/DeleteEmployee")]
-    public async Task<IActionResult> DeleteEmployee([FromQuery]int id)
+    public async Task<IActionResult> DeleteEmployee([FromQuery]int? id)
     {       
         var employees = await _repository.GetEmployeeViewById(id);
 
@@ -67,5 +68,44 @@ public class EmployeesController : Controller
         return RedirectToAction("EmployeesList");
     }
 
+    [Route("/edit")]
+    public async Task<IActionResult> EditEmployee([FromQuery]int? id)
+    {
+        var employees = await _repository.GetEmployeeViewById(id);
+
+        if (employees.Count() == 0)
+            return NotFound();
+
+        var viewModel = new EditEmployeeViewModel
+        {
+            ProgrammingLaguages = await _repository.GetProgrammingLaguages(),
+            Departments = await _repository.GetDepartments(),
+            EmployeeView = employees.First()
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    [Route("/edit")]
+    public async Task<IActionResult> EditEmployee([FromBody]Employee employee)
+    {
+        try
+        {
+            var employees = await _repository.GetEmployeeViewById(employee.Id);
+
+            if (employees.Count() == 0)
+                throw new Exception("Employee was not found");
+
+            await _repository.UpdateEmployee(employee);
+
+            return Ok(new ResponseMessage() { Message = "Success", IsSuccess = true });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new ResponseMessage() { Message = ex.Message, IsSuccess = false });
+        }
+
+    }
 
 }

@@ -11,7 +11,7 @@
                 <label for="name"><b>Name</b></label>
             </div>
              <div class="col-3">
-                <input type="text" placeholder="Enter name" name="name" id="name" >
+                <input type="text" placeholder="Enter name" name="name" id="name">
             </div>                                                   
         </div>
 
@@ -39,7 +39,7 @@
             </div>
 
             <div class="col-3">
-                <select class="form-select" type="text" placeholder="Choose department" name="department" id="department">
+            <select class="form-select" type="text" placeholder="Choose department" name="department" id="department" value=" ">
                     <option selected>Choose department</option>
                     @{
                         if (Model.Departments != null)
@@ -58,7 +58,7 @@
             </div>
 
             <div class="col-3">
-                <select class="form-select" type="text" placeholder="Choose programming language" name="programmingLanguage" id="programmingLanguage">
+            <select class="form-select" type="text" placeholder="Choose programming language" name="programmingLanguage" id="programmingLanguage" value=" ">
                     <option selected>Choose programming language</option>
                     @{
                         if (Model.ProgrammingLaguages != null)
@@ -72,16 +72,21 @@
         </div>    
 
         <div class="row">
-            <input type="submit" value="Add" class="col-1  offset-2"/>
+            <input type="submit" value="Add" class="col-1 offset-2 btn btn-primary"/>
         </div>
 
         <div class="row">
-            <div id="AddingResult" class="col-6 text-center">
+        <div id="OperationResult" class="col-6 text-center">
 
             </div>
         </div>
                                                                    
     </form>
 
-<script src="~/js/employee/employeeScript.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script src="~/js/employee/AddEmployeeScript.js"></script>
+
 
