@@ -47,14 +47,15 @@ public class EmployeesController : Controller
     [Route("")]
     public async Task<IActionResult> EmployeesList()
     {
+       
         var employees = await _repository.GetEmployeeViews();
 
         return View(employees);
     }
 
-    [HttpDelete]
-    [Route("")]
-    public async Task<IActionResult> DeleteEmployee([FromRoute]int id)
+    [HttpGet]
+    [Route("/DeleteEmployee")]
+    public async Task<IActionResult> DeleteEmployee([FromQuery]int id)
     {       
         var employees = await _repository.GetEmployeeViewById(id);
 
@@ -63,7 +64,7 @@ public class EmployeesController : Controller
 
         await _repository.DeleteEmployee(id);
 
-        return View("EmployeesList");
+        return RedirectToAction("EmployeesList");
     }
 
 

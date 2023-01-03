@@ -62,12 +62,13 @@ public class EmployeesRepository
     {
         var employeeId = new SqlParameter("@EmployeeId", id);
 
-        return await _context.EmployeeViews.FromSqlRaw("EXEC dbo.Get @EmployeeId", employeeId).ToArrayAsync();
+        return await _context.EmployeeViews.FromSqlRaw("EXEC dbo.GetEmployeeViewById @EmployeeId", employeeId).ToArrayAsync();
     }
 
     public async Task DeleteEmployee(int id)
     {
         var employeeId = new SqlParameter("@EmployeeId", id);
-        await _context.Database.ExecuteSqlRawAsync("EXEC dbo.DeleteEmployee @EmployeeId", employeeId);
+
+        await _context.Database.ExecuteSqlRawAsync("EXEC dbo.DeleteEmployee @EmployeeId", employeeId);       
     }   
 }
