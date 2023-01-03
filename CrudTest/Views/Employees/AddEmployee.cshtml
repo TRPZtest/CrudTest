@@ -1,0 +1,64 @@
+@{
+    ViewData["Title"] = "AddEmployee";
+
+}
+<div class="container">    
+    <form id="addEmployeeId" action="#/add" method="post">
+        <div id="name-group" class="row form-group">
+            <div class="col-3 text-end">
+                <label for="name"><b>Name</b></label>
+            </div>
+             <div class="col-3">
+                <input type="text" placeholder="Enter name" name="name" id="name" >
+            </div>                                                   
+        </div>
+
+        <div id="surname-group" class="row form-group">
+            <div class="col-3 text-end">
+                 <label for="surname"><b>Surname</b></label>
+            </div>
+             <div class="col-3">
+                <input type="text" placeholder="Enter surname" name="surname" id="surname" >
+            </div>               
+        </div>
+
+        <div id="age-group" class="row form-group">
+            <div class="col-3 text-end">
+                 <label for="age"><b>Age</b></label>
+            </div>
+             <div class="col-3">
+                <input type="text" placeholder="Enter age" name="age" id="age" >
+            </div>              
+        </div>
+
+        <div id="department-group" class="row form-group">
+            <div class="col-3 text-end">
+                <label for="department"><b>Department</b></label>
+            </div>
+             <div class="col-3">
+                 <input type="text" placeholder="Enter department" name="department" id="department" >
+            </div>              
+        </div>
+
+        <div id="programmingLanguage-group" class="row form-group">
+            <div class="col-3 text-end">
+                 <label for="programmingLanguage"><b>Programming language</b></label>
+            </div>
+             <div class="col-3">
+                <input type="text" placeholder="Choose programming language" name="programmingLanguage" id="programmingLanguage" >
+            </div>             
+        </div>    
+
+        <div class="row">
+            <input type="submit" value="Add" class="col-1  offset-2"/>
+        </div>   
+
+        <div class="row">
+
+
+        </div>                                                              
+    </form>
+</div>
+
+<script src="~/js/employee/employeeScript.js"></script>
+
