@@ -47,7 +47,24 @@ public class EmployeesController : Controller
     [Route("")]
     public async Task<IActionResult> EmployeesList()
     {
+        var employees = await _repository.GetEmployeeViews();
 
+        return View(employees);
     }
+
+    [HttpDelete]
+    [Route("")]
+    public async Task<IActionResult> DeleteEmployee([FromRoute]int id)
+    {       
+        var employees = await _repository.GetEmployeeViewById(id);
+
+        if (employees.Count() == 0)
+            return NotFound();
+
+        await _repository.DeleteEmployee(id);
+
+        return View("EmployeesList");
+    }
+
 
 }
