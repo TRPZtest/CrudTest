@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using CrudTest.Dal;
 using CrudTest.Models;
+using CrudTest.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrudTest.Controllers;
@@ -7,11 +9,21 @@ namespace CrudTest.Controllers;
 
 public class EmployeesController : Controller
 {
+    private readonly EmployeesRepository _repository;
+
+    public EmployeesController(EmployeesRepository repository)
+    {
+        _repository = repository;
+    }
+
     [Route("/add")]
     [HttpGet]
     public async Task<IActionResult> AddEmployee()
     {
-        return View();
+        var languages =  await _repository.GetProgrammingLaguages();
+        var departments = await _repository.GetDepartments();
+
+        return View(new AddEmployeeViewModel { Departments = departments, ProgrammingLaguages = languages });
     }
 
     [Route("/add")]
@@ -20,19 +32,22 @@ public class EmployeesController : Controller
     {             
         if (!ModelState.IsValid)
             return  BadRequest(new ResponseMessage() { Message = "Validation error" } );
-
-        
-
-        return  BadRequest(new ResponseMessage() { Message = "Test" } );
-       
+        try
+        {
+            await _repository.AddEmployee(employee);
+            return Ok(new ResponseMessage() { Message = "Success", IsSuccess = true });
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(new ResponseMessage() { Message = ex.Message, IsSuccess = false });
+        }                          
     }
-    
-    // [Route("/edit")]
-    // [HttpGet]
-    // public async Task<IActionResult> EditEmployee()
-    // {
 
-    //     return View()
-    // }
+    [HttpGet]
+    [Route("")]
+    public async Task<IActionResult> EmployeesList()
+    {
+
+    }
 
 }

@@ -7,11 +7,13 @@ public class Employee
     [Key]
     public int Id { get; set; }
     [Required]
-    public string? Name { get; set; }
+    public string Name { get; set; } 
     [Required]
-    public string? Surname { get; set; }
+    public string Surname { get; set; }
     [Required]
-    public string? Department { get; set; }
+    public int Age { get; set; }
     [Required]
-    public string? ProgrammingLanguage { get; set; }
+    public int DepartmentId { get; set; }
+    [Required]
+    public int ProgrammingLanguageId { get; set; }
 }
