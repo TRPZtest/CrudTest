@@ -12,6 +12,6 @@ public class EmployeesDbContext : DbContext
 
     public EmployeesDbContext(DbContextOptions options) : base(options)
     {
-
+        Database.EnsureCreated();
     }
 }
